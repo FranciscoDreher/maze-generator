@@ -73,110 +73,110 @@ class MazeGenerator
 				return false;
 			}
 			else
+			{
+				/*Integers in maze vector
+				*
+				* 1 => Wall
+				*
+				* 0 => Floor
+				*/
+				vector<int> aux;
+				
+				//fill the maze with walls (integer 1)
+				for(int y=0;y<this->size;y++)
 				{
-					/*Integers in maze vector
-					*
-					* 1 => Wall
-					*
-					* 0 => Floor
-					*/
-					vector<int> aux;
-					
-					//fill the maze with walls (integer 1)
-					for(int y=0;y<this->size;y++)
-					{
-						for(int x=0;x<this->size;x++)
-							aux.push_back(1);
-						this->maze.push_back(aux);
-						aux.clear();
-					}
-					
-					//amount of walls in the final maze
-					int finalWalls = ((this->size - 1) * (this->size - 1)) / 3;
-					
-					//amount of walls in the actual maze
-					int amountOfWalls = (this->size - 1) * (this->size - 1);
-					
-					//maximum steps that the algorithm can take
-					int steps = amountOfSteps;
-					
-					srand(time(NULL));
-					
-					//first position indexes
-					//dirX stands for ROW
-					//dirY stands for COLUMN
-					int dirX=1, dirY=1;
-					
-					//directions that the algorithm can take
-					int direction;
-					
-					//first position with Floor
-					this->maze[dirX][dirY] = 0;
-					
-					//generates the floor while the actual amount of walls is greater than the final amount
-					while(amountOfWalls > finalWalls)
-					{
-						//sets a random direction
-						//0 down, 1 up, 2 right, 3 left
-						direction = rand()%4;
-						
-						if(direction == 0)
-						{
-							//iterates while there are steps remaining and the X index did not reach the lower border
-							while((dirX < (this->size - 2)) && (steps >= 0))
-							{
-								dirX++;
-								this->maze[dirX][dirY] = 0;
-								steps--;
-							}
-							
-							//restarts the steps to the original amount
-							steps = amountOfSteps;
-						}
-						else if(direction == 1)
-						{
-							//iterates while there are steps remaining and the X index did not reach the upper border
-							while((dirX > 1) && (steps >= 0))
-							{
-								dirX--;
-								this->maze[dirX][dirY] = 0;
-								steps--;
-							}
-							
-							//restarts the steps to the original amount
-							steps = amountOfSteps;
-						}
-						else if(direction == 2)
-						{
-							//iterates while there are steps remaining and the Y index did not reach the right border
-							while((dirY < (this->size - 2)) && (steps >= 0))
-							{
-								dirY++;
-								this->maze[dirX][dirY] = 0;
-								steps--;
-							}
-							
-							//restarts the steps to the original amount
-							steps = amountOfSteps;
-						}
-						else if(direction == 3)
-						{
-							//iterates while there are steps remaining and the Y index did not reach the left border
-							while((dirY > 1) && (steps >= 0))
-							{
-								dirY--;
-								this->maze[dirX][dirY] = 0;
-								steps--;
-							}
-							//restarts the steps to the original amount
-							steps = amountOfSteps;
-						}
-						
-						amountOfWalls--;
-					}
-					
-					return true;
+					for(int x=0;x<this->size;x++)
+						aux.push_back(1);
+					this->maze.push_back(aux);
+					aux.clear();
 				}
+				
+				//amount of walls in the final maze
+				int finalWalls = ((this->size - 1) * (this->size - 1)) / 3;
+				
+				//amount of walls in the actual maze
+				int amountOfWalls = (this->size - 1) * (this->size - 1);
+				
+				//maximum steps that the algorithm can take
+				int steps = amountOfSteps;
+				
+				srand(time(NULL));
+				
+				//first position indexes
+				//dirX stands for ROW
+				//dirY stands for COLUMN
+				int dirX=1, dirY=1;
+				
+				//directions that the algorithm can take
+				int direction;
+				
+				//first position with Floor
+				this->maze[dirX][dirY] = 0;
+				
+				//generates the floor while the actual amount of walls is greater than the final amount
+				while(amountOfWalls > finalWalls)
+				{
+					//sets a random direction
+					//0 down, 1 up, 2 right, 3 left
+					direction = rand()%4;
+					
+					if(direction == 0)
+					{
+						//iterates while there are steps remaining and the X index did not reach the lower border
+						while((dirX < (this->size - 2)) && (steps >= 0))
+						{
+							dirX++;
+							this->maze[dirX][dirY] = 0;
+							steps--;
+						}
+						
+						//restarts the steps to the original amount
+						steps = amountOfSteps;
+					}
+					else if(direction == 1)
+					{
+						//iterates while there are steps remaining and the X index did not reach the upper border
+						while((dirX > 1) && (steps >= 0))
+						{
+							dirX--;
+							this->maze[dirX][dirY] = 0;
+							steps--;
+						}
+						
+						//restarts the steps to the original amount
+						steps = amountOfSteps;
+					}
+					else if(direction == 2)
+					{
+						//iterates while there are steps remaining and the Y index did not reach the right border
+						while((dirY < (this->size - 2)) && (steps >= 0))
+						{
+							dirY++;
+							this->maze[dirX][dirY] = 0;
+							steps--;
+						}
+						
+						//restarts the steps to the original amount
+						steps = amountOfSteps;
+					}
+					else if(direction == 3)
+					{
+						//iterates while there are steps remaining and the Y index did not reach the left border
+						while((dirY > 1) && (steps >= 0))
+						{
+							dirY--;
+							this->maze[dirX][dirY] = 0;
+							steps--;
+						}
+						//restarts the steps to the original amount
+						steps = amountOfSteps;
+					}
+					
+					amountOfWalls--;
+				}
+				
+				return true;
+			}
 		}
 		
 		void printMaze()
